@@ -14,6 +14,13 @@ type LocaleHandler struct {
 	LocaleRepository repository.LocaleRepository
 }
 
+// NewLocaleHandler initializes a new instance of LocaleHandler
+func NewLocaleHandler(localeRepository repository.LocaleRepository) *LocaleHandler {
+	return &LocaleHandler{
+		LocaleRepository: localeRepository,
+	}
+}
+
 // CreateLocale creates a new locale
 func (lh *LocaleHandler) CreateLocale(w http.ResponseWriter, r *http.Request) {
 	// Implement the logic to create a new locale
