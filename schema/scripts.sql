@@ -1,3 +1,5 @@
+CREATE DATABASE `app_consent` 
+
 CREATE TABLE product (
   id VARCHAR(36) PRIMARY KEY,
   name VARCHAR(255) NOT NULL
