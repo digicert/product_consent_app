@@ -2,12 +2,20 @@ package repository
 
 import (
 	"database/sql"
+	"fmt"
 
 	"github.com/digicert/product-consent-app/models"
+	"github.com/google/uuid"
 )
 
 type LocaleRepository struct {
 	DB *sql.DB
+}
+
+func NewLocaleRepository(db *sql.DB) *LocaleRepository {
+	return &LocaleRepository{
+		DB: db,
+	}
 }
 
 func (lr *LocaleRepository) UpdateLocale(locale *models.Locale) error {
@@ -18,10 +26,11 @@ func (lr *LocaleRepository) UpdateLocale(locale *models.Locale) error {
 	return nil
 }
 
-func (lr *LocaleRepository) CreateLocale(locale *models.Locale) error {
+func (lr *LocaleRepository) CreateLocale(locale *models.Locale) (string, error) {
+	locale.ID = uuid.New().String()
 	_, err := lr.DB.Exec("INSERT INTO locale (id, locale) VALUES (?, ?)", locale.ID, locale.Locale)
 	if err != nil {
-		return err
+		return "", fmt.Errorf("Failed to create locale: %v", err)
 	}
-	return nil
+	return locale.ID, nil
 }

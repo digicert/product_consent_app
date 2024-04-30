@@ -31,13 +31,13 @@ func (lh *LocaleHandler) CreateLocale(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = lh.LocaleRepository.CreateLocale(&locale)
+	id, err := lh.LocaleRepository.CreateLocale(&locale)
 	if err != nil {
 		http.Error(w, "failed to create locale", http.StatusInternalServerError)
 		return
 	}
 
-	response := map[string]string{"message": "Locale created successfully"}
+	response := map[string]string{"id": id, "message": "Locale created successfully"}
 	jsonResponse, _ := json.Marshal(response)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
