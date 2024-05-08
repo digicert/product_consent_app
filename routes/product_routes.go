@@ -8,5 +8,6 @@ import (
 // RegisterProductRoutes registers routes for product-related endpoints
 func RegisterProductRoutes(router *mux.Router, productHandler *handlers.ProductHandler) {
 	router.HandleFunc("/products", productHandler.CreateProduct).Methods("POST")
-	router.HandleFunc("/products/{id}", productHandler.UpdateProduct).Methods("PUT")
+	router.HandleFunc("/products/{id}/name/{name}", productHandler.UpdateProduct).Methods("PUT")
+	router.HandleFunc("/products/{id}", productHandler.DeleteProduct).Methods("DELETE")
 }

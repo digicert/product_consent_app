@@ -31,17 +31,32 @@ func (pr *ProductRepository) CreateProduct(product *models.Product) (string, err
 }
 
 // UpdateProduct updates an existing product in the database
-func (pr *ProductRepository) UpdateProduct(product *models.Product) error {
-	result, err := pr.DB.Exec("UPDATE product SET name = ? WHERE id = ?", product.Name, product.ID)
+func (pr *ProductRepository) UpdateProduct(ID string, name string) (string, error) {
+	result, err := pr.DB.Exec("UPDATE product SET name = ? WHERE id = ?", name, ID)
 	if err != nil {
-		return fmt.Errorf("failed to update product: %v", err)
+		return "", fmt.Errorf("failed to update product: %v", err)
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		return fmt.Errorf("failed to get rows affected: %v", err)
+		return "", fmt.Errorf("failed to get rows affected: %v", err)
 	}
 	if rowsAffected == 0 {
-		return fmt.Errorf("no rows affected, product not updated")
+		return "", fmt.Errorf("no rows affected, product not updated")
 	}
-	return nil
+	return ID, err
+}
+
+func (pr *ProductRepository) DeleteProduct(ID string) (string, error) {
+	result, err := pr.DB.Exec("DELETE FROM product WHERE id = ?", ID)
+	if err != nil {
+		return "", fmt.Errorf("failed to delete product: %v", err)
+	}
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return "", fmt.Errorf("failed to get rows affected: %v", err)
+	}
+	if rowsAffected == 0 {
+		return "", fmt.Errorf("no rows affected, product not deleted")
+	}
+	return ID, err
 }

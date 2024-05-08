@@ -48,23 +48,48 @@ func (ph *ProductHandler) UpdateProduct(w http.ResponseWriter, r *http.Request) 
 
 	vars := mux.Vars(r)
 	productID := vars["id"]
+	name := vars["name"]
 
-	// Decode json request body into product struct
-	var updateProduct models.Product
-	err := json.NewDecoder(r.Body).Decode(&updateProduct)
-	if err != nil {
-		http.Error(w, fmt.Sprintf("failed to decode request body: %v", err), http.StatusBadRequest)
-		return
+	product := models.Product{
+		ID:   productID,
+		Name: name,
 	}
 
 	// Update product in database
-	err = ph.ProductRepo.UpdateProduct(&updateProduct)
+	id, err := ph.ProductRepo.UpdateProduct(product.ID, product.Name)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("failed to update product: %v", err), http.StatusInternalServerError)
 		return
 	}
 
 	// Return success response
+	response := map[string]string{"id": id, "message": "Product updated successfully"}
+	jsonResponse, _ := json.Marshal(response)
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, "Product with ID %s updated successfully", productID)
+	w.Write(jsonResponse)
+}
+
+func (ph *ProductHandler) DeleteProduct(w http.ResponseWriter, r *http.Request) {
+	// Parse product id from url parameter
+	vars := mux.Vars(r)
+	productId := vars["id"]
+
+	product := models.Product{
+		ID: productId,
+	}
+
+	// Delete product from database
+	id, err := ph.ProductRepo.DeleteProduct(product.ID)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("failed to delete product: %v", err), http.StatusInternalServerError)
+		return
+	}
+
+	// Return success response
+	response := map[string]string{"id": id, "message": "Product deleted successfully"}
+	jsonResponse, _ := json.Marshal(response)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonResponse)
 }

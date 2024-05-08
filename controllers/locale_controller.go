@@ -20,5 +20,6 @@ func NewLocaleController(localeHandler *handlers.LocaleHandler) *LocaleControlle
 // RegisterLocaleRoutes registers routes for the locale controller
 func (lc *LocaleController) RegisterLocaleRoutes(router *mux.Router) {
 	router.HandleFunc("/locales", lc.LocaleHandler.CreateLocale).Methods("POST")
-	router.HandleFunc("/locales/{id}", lc.LocaleHandler.UpdateLocale).Methods("PUT")
+	router.HandleFunc("/locales/{id}/name/{name}", lc.LocaleHandler.UpdateLocale).Methods("PUT")
+	router.HandleFunc("/locales/{id}", lc.LocaleHandler.DeleteLocale).Methods("DELETE")
 }

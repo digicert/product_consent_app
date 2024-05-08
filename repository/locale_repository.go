@@ -18,12 +18,19 @@ func NewLocaleRepository(db *sql.DB) *LocaleRepository {
 	}
 }
 
-func (lr *LocaleRepository) UpdateLocale(locale *models.Locale) error {
-	_, err := lr.DB.Exec("UPDATE locale SET locale = ? WHERE id = ?", locale.Locale, locale.ID)
+func (lr *LocaleRepository) UpdateLocale(ID string, locale string) (string, error) {
+	result, err := lr.DB.Exec("UPDATE locale SET locale = ? WHERE id = ?", locale, ID)
 	if err != nil {
-		return err
+		return "", fmt.Errorf("failed to update locale: %v", err)
 	}
-	return nil
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return "", fmt.Errorf("failed to get rows affected: %v", err)
+	}
+	if rowsAffected == 0 {
+		return "", fmt.Errorf("no rows affected, locale not updated")
+	}
+	return ID, nil
 }
 
 func (lr *LocaleRepository) CreateLocale(locale *models.Locale) (string, error) {
@@ -33,4 +40,19 @@ func (lr *LocaleRepository) CreateLocale(locale *models.Locale) (string, error) 
 		return "", fmt.Errorf("Failed to create locale: %v", err)
 	}
 	return locale.ID, nil
+}
+
+func (lr *LocaleRepository) DeleteLocale(ID string) (string, error) {
+	result, err := lr.DB.Exec("DELETE FROM locale WHERE id = ?", ID)
+	if err != nil {
+		return "", fmt.Errorf("failed to delete locale: %v", err)
+	}
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return "", fmt.Errorf("failed to get rows affected: %v", err)
+	}
+	if rowsAffected == 0 {
+		return "", fmt.Errorf("no rows affected, locale not deleted")
+	}
+	return ID, nil
 }
