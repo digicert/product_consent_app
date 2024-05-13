@@ -106,10 +106,9 @@ func (lh *LocaleHandler) GetLocale(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	response, err := json.Marshal(locales)
-	jsonResponse, _ := json.Marshal(response)
 	w.Header().Set("Content-Tpe", "application/json")
 	w.WriteHeader(http.StatusOK)
-	w.Write(jsonResponse)
+	w.Write(response)
 
 }
 
