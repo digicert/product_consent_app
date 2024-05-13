@@ -56,3 +56,33 @@ func (lr *LocaleRepository) DeleteLocale(ID string) (string, error) {
 	}
 	return ID, nil
 }
+
+func (lr *LocaleRepository) GetLocaleById(ID string) (*models.Locale, error) {
+	locale := &models.Locale{}
+	err := lr.DB.QueryRow("SELECT id, locale FROM locale WHERE id = ?", ID).Scan(&locale.ID, &locale.Locale)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get locale: %v", err)
+	}
+	return locale, nil
+}
+
+func (lr *LocaleRepository) GetAllLocales(offset, limit int) ([]*models.Locale, error) {
+	rows, err := lr.DB.Query("SELECT id, locale FROM locale LIMIT ?, ?", offset, limit)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get locales: %v", err)
+	}
+	defer rows.Close()
+
+	var locales []*models.Locale
+	for rows.Next() {
+		var locale models.Locale
+		if err := rows.Scan(&locale.ID, &locale.Locale); err != nil {
+			return nil, fmt.Errorf("failed to scan locale: %v", err)
+		}
+		locales = append(locales, &locale)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("error iteration over locales: %v", err)
+	}
+	return locales, err
+}

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/digicert/product-consent-app/models"
 	"github.com/digicert/product-consent-app/repository"
@@ -86,6 +87,53 @@ func (lh *LocaleHandler) DeleteLocale(w http.ResponseWriter, r *http.Request) {
 	}
 	response := map[string]string{"id": id, "message": "Locale deleted successfully"}
 	jsonResponse, _ := json.Marshal(response)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonResponse)
+}
+
+func (lh *LocaleHandler) GetLocale(w http.ResponseWriter, r *http.Request) {
+	mux := mux.Vars(r)
+	localeId := mux["id"]
+
+	locale := models.Locale{
+		ID: localeId,
+	}
+
+	locales, err := lh.LocaleRepository.GetLocaleById(locale.ID)
+	if err != nil {
+		http.Error(w, "failed to get locale"+err.Error(), http.StatusInternalServerError)
+		return
+	}
+	response, err := json.Marshal(locales)
+	jsonResponse, _ := json.Marshal(response)
+	w.Header().Set("Content-Tpe", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonResponse)
+
+}
+
+func (lh *LocaleHandler) GetAllLocales(w http.ResponseWriter, r *http.Request) {
+	page, err := strconv.Atoi(r.URL.Query().Get("page"))
+	if err != nil || page < 1 {
+		page = 1
+	}
+	pageSize, err := strconv.Atoi(r.URL.Query().Get("pageSize"))
+	if err != nil || pageSize < 1 {
+		pageSize = 10
+	}
+	offset := (page - 1) * pageSize
+
+	products, err := lh.LocaleRepository.GetAllLocales(offset, pageSize)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("failed to get locales: %v", err), http.StatusInternalServerError)
+		return
+	}
+
+	jsonResponse, err := json.Marshal(products)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("failed to parse locales json : %v", err), http.StatusInternalServerError)
+	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonResponse)

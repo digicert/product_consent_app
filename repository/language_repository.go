@@ -65,3 +65,33 @@ func (lr *LanguageRepository) LinkLanguageWithLocale(ID string, localeID string,
 	}
 	return languageID, nil
 }
+
+func (lr *LanguageRepository) GetLanguageByID(ID string) (*models.Language, error) {
+	language := &models.Language{}
+	err := lr.DB.QueryRow("SELECT id, language FROM language WHERE id = ?", ID).Scan(&language.ID, &language.Language)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get language: %v", err)
+	}
+	return language, nil
+}
+
+func (lr *LanguageRepository) GetAllLanguages(offset, limit int) ([]*models.Language, error) {
+	rows, err := lr.DB.Query("SELECT id, language FROM language LIMIT ?, ?", offset, limit)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get languages: %v", err)
+	}
+	defer rows.Close()
+
+	var languages []*models.Language
+	for rows.Next() {
+		var language models.Language
+		if err := rows.Scan(&language.ID, &language.Language); err != nil {
+			return nil, fmt.Errorf("failed to scan language: %v", err)
+		}
+		languages = append(languages, &language)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("failed to scan languages: %v", err)
+	}
+	return languages, nil
+}

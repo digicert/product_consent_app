@@ -9,4 +9,6 @@ func RegisterLocaleRoutes(router *mux.Router, localeHandler *handlers.LocaleHand
 	router.HandleFunc("/locales", localeHandler.CreateLocale).Methods("POST")
 	router.HandleFunc("/locales/{id}/name/{name}", localeHandler.UpdateLocale).Methods("PUT")
 	router.HandleFunc("/locales/{id}", localeHandler.DeleteLocale).Methods("DELETE")
+	router.HandleFunc("/locales/{id}", localeHandler.GetLocale).Methods("GET")
+	router.HandleFunc("/locales", localeHandler.GetAllLocales).Methods("GET")
 }

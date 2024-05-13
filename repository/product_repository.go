@@ -60,3 +60,33 @@ func (pr *ProductRepository) DeleteProduct(ID string) (string, error) {
 	}
 	return ID, err
 }
+
+func (pr *ProductRepository) GetProductById(ID string) (*models.Product, error) {
+	product := &models.Product{}
+	err := pr.DB.QueryRow("SELECT id, name FROM product WHERE id = ?", ID).Scan(&product.ID, &product.Name)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get product: %v", err)
+	}
+	return product, nil
+}
+
+func (pr *ProductRepository) GetAllProducts(offset, limit int) ([]*models.Product, error) {
+	rows, err := pr.DB.Query("SELECT id, name FROM product LIMIT ?, ?", offset, limit)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get products: %v", err)
+	}
+	defer rows.Close()
+
+	var products []*models.Product
+	for rows.Next() {
+		var product models.Product
+		if err := rows.Scan(&product.ID, &product.Name); err != nil {
+			return nil, fmt.Errorf("failed to scan product: %v", err)
+		}
+		products = append(products, &product)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("error iteration over products:%v", err)
+	}
+	return products, err
+}

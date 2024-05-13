@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/digicert/product-consent-app/models"
 	"github.com/digicert/product-consent-app/repository"
@@ -86,6 +87,51 @@ func (lh *LanguageHandler) DeleteLanguage(w http.ResponseWriter, r *http.Request
 
 	response := map[string]string{"id": id, "message": "Language deleted successfully"}
 	jsonResponse, _ := json.Marshal(response)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonResponse)
+}
+
+func (lh *LanguageHandler) GetLanguageByID(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	languageID := vars["id"]
+
+	language := models.Language{
+		ID: languageID,
+	}
+
+	lang, err := lh.LanguageRepo.GetLanguageByID(language.ID)
+	if err != nil {
+		http.Error(w, "failed to get language "+err.Error(), http.StatusInternalServerError)
+	}
+	response, err := json.Marshal(lang)
+	jsonResponse, _ := json.Marshal(response)
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(jsonResponse)
+}
+
+func (lh *LanguageHandler) GetAllLanguages(w http.ResponseWriter, r *http.Request) {
+	page, err := strconv.Atoi(r.URL.Query().Get("page"))
+	if err != nil || page < 1 {
+		page = 1
+	}
+	pageSize, err := strconv.Atoi(r.URL.Query().Get("pageSize"))
+	if err != nil || pageSize < 1 {
+		pageSize = 10
+	}
+	offset := (page - 1) * pageSize
+
+	langs, err := lh.LanguageRepo.GetAllLanguages(offset, pageSize)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("failed to get languages: %v", err), http.StatusInternalServerError)
+		return
+	}
+
+	jsonResponse, err := json.Marshal(langs)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("failed to parse languages json : %v", err), http.StatusInternalServerError)
+		return
+	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonResponse)
