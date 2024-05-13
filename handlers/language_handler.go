@@ -105,9 +105,8 @@ func (lh *LanguageHandler) GetLanguageByID(w http.ResponseWriter, r *http.Reques
 		http.Error(w, "failed to get language "+err.Error(), http.StatusInternalServerError)
 	}
 	response, err := json.Marshal(lang)
-	jsonResponse, _ := json.Marshal(response)
 	w.Header().Set("Content-Type", "application/json")
-	w.Write(jsonResponse)
+	w.Write(response)
 }
 
 func (lh *LanguageHandler) GetAllLanguages(w http.ResponseWriter, r *http.Request) {
