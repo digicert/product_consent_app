@@ -12,4 +12,5 @@ func RegisterLanguageRoutes(router *mux.Router, languageHandler *handlers.Langua
 	router.HandleFunc("/languages/{id}", languageHandler.GetLanguageByID).Methods("GET")
 	router.HandleFunc("/languages", languageHandler.GetAllLanguages).Methods("GET")
 	router.HandleFunc("/languages/{language_id}/locales/{locale_id}", languageHandler.LinkLanguageWithLocale).Methods("POST")
+	router.HandleFunc("/languages/{language_id}/locales/{locale_id}", languageHandler.UnlinkLanguageWithLocale).Methods("DELETE")
 }

@@ -26,4 +26,6 @@ func (lc *LanguageController) RegisterLanguageRoutes(router *mux.Router) {
 	router.HandleFunc("/languages", lc.LanguageHandler.GetAllLanguages).Methods("GET")
 	// link language to locale
 	router.HandleFunc("/languages/{language_id}/locales/{locale_id}", lc.LanguageHandler.LinkLanguageWithLocale).Methods("POST")
+	// unlink language from locale
+	router.HandleFunc("/languages/{language_id}/locales/{locale_id}", lc.LanguageHandler.UnlinkLanguageWithLocale).Methods("DELETE")
 }

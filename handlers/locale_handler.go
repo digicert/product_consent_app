@@ -86,7 +86,7 @@ func (lh *LocaleHandler) DeleteLocale(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	response := map[string]string{"id": id, "message": "Locale deleted successfully"}
-	jsonResponse, _ := json.Marshal(response)
+	jsonResponse, err := json.Marshal(response)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonResponse)

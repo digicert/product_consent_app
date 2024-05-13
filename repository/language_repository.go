@@ -66,6 +66,21 @@ func (lr *LanguageRepository) LinkLanguageWithLocale(ID string, localeID string,
 	return languageID, nil
 }
 
+func (lr *LanguageRepository) UnlinkLanguageWithLocale(localeID string, languageID string) (string, error) {
+	result, err := lr.DB.Exec("DELETE FROM locale_language WHERE locale_id = ? AND language_id = ?", localeID, languageID)
+	if err != nil {
+		return "", fmt.Errorf("failed to unlink language with locale: %v", err)
+	}
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return "", fmt.Errorf("failed to get rows affected: %v", err)
+	}
+	if rowsAffected == 0 {
+		return "", fmt.Errorf("no rows affected, language not unlinked")
+	}
+	return languageID, nil
+}
+
 func (lr *LanguageRepository) GetLanguageByID(ID string) (*models.Language, error) {
 	language := &models.Language{}
 	err := lr.DB.QueryRow("SELECT id, language FROM language WHERE id = ?", ID).Scan(&language.ID, &language.Language)

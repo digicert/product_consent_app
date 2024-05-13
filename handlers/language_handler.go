@@ -161,3 +161,29 @@ func (lh *LanguageHandler) LinkLanguageWithLocale(w http.ResponseWriter, r *http
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonResponse)
 }
+
+// Unlink Language with Locale
+func (lh *LanguageHandler) UnlinkLanguageWithLocale(w http.ResponseWriter, r *http.Request) {
+	// Implement the logic to unlink a language with a locale
+	vars := mux.Vars(r)
+	localeID := vars["locale_id"]
+	languageID := vars["language_id"]
+	fmt.Printf("Unlinking language with locale from params: LocaleID=%s, LanguageID=%s\n", localeID, languageID)
+
+	link := models.LocaleLanguage{
+		LocaleID:   localeID,
+		LanguageID: languageID,
+	}
+
+	id, err := lh.LanguageRepo.UnlinkLanguageWithLocale(link.LocaleID, link.LanguageID)
+	if err != nil {
+		http.Error(w, "failed to unlink language with locale "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	response := map[string]string{"id": id, "message": "Language unlinked with locale successfully"}
+	jsonResponse, _ := json.Marshal(response)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonResponse)
+}

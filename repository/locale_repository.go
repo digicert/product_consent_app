@@ -54,7 +54,7 @@ func (lr *LocaleRepository) DeleteLocale(ID string) (string, error) {
 	if rowsAffected == 0 {
 		return "", fmt.Errorf("no rows affected, locale not deleted")
 	}
-	return ID, nil
+	return ID, err
 }
 
 func (lr *LocaleRepository) GetLocaleById(ID string) (*models.Locale, error) {
