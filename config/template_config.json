@@ -1,7 +1,7 @@
 {
     "templates": {
-        "template1": "This is consent template 1.",
-        "template2": "This is consent template 2",
-        "template3": "This is consent template 3"
+        "template1": "If your business sends certain confidential information by email, add a confidentiality disclaimer to all electronic communications to comply with the law or just to ensure your messages are only seen by the intended audience.",
+        "template2": "For websites and apps, warranty disclaimers state that the company makes no promises about the accuracy and reliability of the content it publishes. Below, see an example from our warranty disclaimer template.",
+        "template3": "This standard disclaimer wording allows you to avoid responsibility for any mistakes, errors, or omissions that occur. This prevents users from taking legal action against your business because of a simple mistake"
     }
 }

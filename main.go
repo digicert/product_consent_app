@@ -25,6 +25,7 @@ func main() {
 	localeRepo := repository.NewLocaleRepository(db.DB)
 	templateRepo := repository.NewConsentTemplateRepository(db.DB)
 	productTemplateRepo := repository.NewProductTemplateRepository(db.DB)
+	clientConsentRepo := repository.NewClientConsentRepository(db.DB)
 
 	// Initialize product handler with the product repository
 	productHandler := handlers.NewProductHandler(*productRepo)
@@ -32,6 +33,7 @@ func main() {
 	localeHandler := handlers.NewLocaleHandler(*localeRepo)
 	templateHandler := handlers.NewConsentTemplateHandler(*templateRepo)
 	productTemplateHandler := handlers.NewProductTemplateHandler(*productTemplateRepo)
+	clientConsentHandler := handlers.NewClientConsentHandler(*clientConsentRepo)
 
 	// Register product routes
 	routes.RegisterProductRoutes(router, productHandler)
@@ -39,6 +41,7 @@ func main() {
 	routes.RegisterLocaleRoutes(router, localeHandler)
 	routes.RegisterTemplateRoutes(router, templateHandler)
 	routes.RegisterProductTemplateRoutes(router, productTemplateHandler)
+	routes.RegisterClientConsentRoutes(router, clientConsentHandler)
 
 	// Start server
 	log.Println("Server started on port 8090")
