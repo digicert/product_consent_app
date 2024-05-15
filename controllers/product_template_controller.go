@@ -19,4 +19,5 @@ func (ptc *ProductTemplateController) RegisterProductTemplateRoutes(router *mux.
 	// Register routes for the product template controller
 	router.HandleFunc("/product/templates", ptc.ProductTemplateHandler.CreateProductTemplate).Methods("POST")
 	router.HandleFunc("/product/templates/{id}", ptc.ProductTemplateHandler.GetProductTemplateByID).Methods("GET")
+	router.HandleFunc("/product/{id}/templates/active", ptc.ProductTemplateHandler.GetActiveProductTemplatesByProductID).Methods("GET")
 }

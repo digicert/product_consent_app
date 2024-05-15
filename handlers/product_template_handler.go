@@ -61,3 +61,21 @@ func (pth *ProductTemplateHandler) GetProductTemplateByID(w http.ResponseWriter,
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonResponse)
 }
+
+func (pth *ProductTemplateHandler) GetActiveProductTemplatesByProductID(w http.ResponseWriter, r *http.Request) {
+	// GetActiveProductTemplatesByProductID retrieves all active product templates by product ID
+
+	vars := mux.Vars(r)
+	productID := vars["id"]
+
+	productTemplates, err := pth.ProductTemplateRepo.GetActiveProductTemplatesByProductID(productID)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("failed to get active product templates by product ID: %v", err), http.StatusInternalServerError)
+		return
+	}
+
+	jsonResponse, _ := json.Marshal(productTemplates)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonResponse)
+}
