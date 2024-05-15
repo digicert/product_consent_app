@@ -63,7 +63,7 @@ func (lr *LanguageRepository) LinkLanguageWithLocale(ID string, localeID string,
 	if err != nil {
 		return "", fmt.Errorf("failed to link language with locale: %v", err)
 	}
-	return languageID, nil
+	return ID, nil
 }
 
 func (lr *LanguageRepository) UnlinkLanguageWithLocale(localeID string, languageID string) (string, error) {
@@ -79,6 +79,28 @@ func (lr *LanguageRepository) UnlinkLanguageWithLocale(localeID string, language
 		return "", fmt.Errorf("no rows affected, language not unlinked")
 	}
 	return languageID, nil
+}
+
+// get all linked languages by locale ID
+func (lr *LanguageRepository) GetLinkedLanguagesByLocaleID(localeID string) ([]*models.Language, error) {
+	rows, err := lr.DB.Query("SELECT l.id, l.language FROM language l JOIN locale_language ll ON l.id = ll.language_id WHERE ll.locale_id = ?", localeID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get linked languages by locale ID: %v", err)
+	}
+	defer rows.Close()
+
+	var languages []*models.Language
+	for rows.Next() {
+		var language models.Language
+		if err := rows.Scan(&language.ID, &language.Language); err != nil {
+			return nil, fmt.Errorf("failed to scan linked language: %v", err)
+		}
+		languages = append(languages, &language)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("failed to scan linked languages: %v", err)
+	}
+	return languages, nil
 }
 
 func (lr *LanguageRepository) GetLanguageByID(ID string) (*models.Language, error) {

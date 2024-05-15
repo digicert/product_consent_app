@@ -23,9 +23,10 @@ func NewClientConsentRepository(db *sql.DB) *ClientConsentRepository {
 func (ccr *ClientConsentRepository) CreateClientConsent(clientConsent *models.ClientConsent) (string, error) {
 	ID := uuid.New().String()
 	// date and time
-	Datetime := time.Now()
+	time := time.Now()
+	dateTime := time.Format("2006-01-02 15:04:05")
 
-	_, err := ccr.DB.Exec("INSERT INTO client_consent (id, product_template_id, individual_id, date, optout_reason) VALUES (?, ?, ?, ?, ?)", ID, clientConsent.ProductTemplateID, clientConsent.IndividualID, Datetime, clientConsent.OptoutReason)
+	_, err := ccr.DB.Exec("INSERT INTO client_consent (id, product_template_id, individual_id, date, optout_reason) VALUES (?, ?, ?, ?, ?)", ID, clientConsent.ProductTemplateID, clientConsent.IndividualID, dateTime, clientConsent.OptoutReason)
 	if err != nil {
 		return "", fmt.Errorf("failed to create client consent: %v", err)
 	}

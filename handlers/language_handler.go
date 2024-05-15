@@ -187,3 +187,33 @@ func (lh *LanguageHandler) UnlinkLanguageWithLocale(w http.ResponseWriter, r *ht
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonResponse)
 }
+
+// Get all linked languages by locale ID
+func (lh *LanguageHandler) GetLinkedLanguagesByLocaleID(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	localeID := vars["locale_id"]
+
+	langs, err := lh.LanguageRepo.GetLinkedLanguagesByLocaleID(localeID)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("failed to get linked languages by locale ID: %v", err), http.StatusInternalServerError)
+		return
+	}
+
+	var linkedLanguages []models.LinkedLanguageResponse
+	for _, lang := range langs {
+		linkedLanguages = append(linkedLanguages, models.LinkedLanguageResponse{
+			LanguageID: lang.ID,
+			Language:   lang.Language,
+		})
+	}
+
+	jsonResponse, err := json.Marshal(linkedLanguages)
+
+	if err != nil {
+		http.Error(w, fmt.Sprintf("failed to parse linked languages json : %v", err), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonResponse)
+}
