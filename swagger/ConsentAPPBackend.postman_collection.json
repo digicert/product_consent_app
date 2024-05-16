@@ -1,0 +1,577 @@
+{
+	"info": {
+		"_postman_id": "8ed92979-bad0-4d8b-a7bf-900db81a814d",
+		"name": "ConsentAPPBackend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21111988"
+	},
+	"item": [
+		{
+			"name": "Language",
+			"item": [
+				{
+					"name": "Create Language",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"language\" : \"English\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/languages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"languages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Language",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/languages/bc95129d-dbed-4c30-a51c-d0b8755aadb0/name/German",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"languages",
+								"bc95129d-dbed-4c30-a51c-d0b8755aadb0",
+								"name",
+								"German"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Language By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/languages/d4567f9a-707b-4d66-995e-9f76f709ab75",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"languages",
+								"d4567f9a-707b-4d66-995e-9f76f709ab75"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Languages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/languages?page=1&pageSize=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"languages"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Language",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/languages/bc95129d-dbed-4c30-a51c-d0b8755aadb0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"languages",
+								"bc95129d-dbed-4c30-a51c-d0b8755aadb0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Locale",
+			"item": [
+				{
+					"name": "Create Locale",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"locale\" : \"ZA\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/locales",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"locales"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Locale",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/locales/f079dc77-c808-4fa0-8beb-ee5639a71b68/name/DE",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"locales",
+								"f079dc77-c808-4fa0-8beb-ee5639a71b68",
+								"name",
+								"DE"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Locale By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/locales/f079dc77-c808-4fa0-8beb-ee5639a71b68",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"locales",
+								"f079dc77-c808-4fa0-8beb-ee5639a71b68"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Locales",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/locales",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"locales"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Locale",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/locales/f079dc77-c808-4fa0-8beb-ee5639a71b68",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"locales",
+								"f079dc77-c808-4fa0-8beb-ee5639a71b68"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Locale Language Mapping",
+			"item": [
+				{
+					"name": "Link Language With Locale",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/languages/e54907c0-71a8-4c5e-86c0-c4e841b0b52a/locales/6713efc1-d6dd-4ad4-9cfe-d05c222c3f18",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"languages",
+								"e54907c0-71a8-4c5e-86c0-c4e841b0b52a",
+								"locales",
+								"6713efc1-d6dd-4ad4-9cfe-d05c222c3f18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unlink Language With Locale",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/languages/e54907c0-71a8-4c5e-86c0-c4e841b0b52a/locales/6713efc1-d6dd-4ad4-9cfe-d05c222c3f18",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"languages",
+								"e54907c0-71a8-4c5e-86c0-c4e841b0b52a",
+								"locales",
+								"6713efc1-d6dd-4ad4-9cfe-d05c222c3f18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get linked languages by locale",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Create Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Test100\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/products/8e78dec4-67eb-4bbc-a3da-fcb6db11bd20/name/Test10Updated",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"products",
+								"8e78dec4-67eb-4bbc-a3da-fcb6db11bd20",
+								"name",
+								"Test10Updated"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/products/8e78dec4-67eb-4bbc-a3da-fcb6db11bd20",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"products",
+								"8e78dec4-67eb-4bbc-a3da-fcb6db11bd20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/products/8e78dec4-67eb-4bbc-a3da-fcb6db11bd20",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"products",
+								"8e78dec4-67eb-4bbc-a3da-fcb6db11bd20"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Template",
+			"item": [
+				{
+					"name": "Create Consent Template",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"locale_language_id\" : \"213f7147-6702-4ae7-9201-21a2c9a4f778\",\n    \"template_name\": \"template1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/templates",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"templates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Consent Template By ID",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product Template",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Test100\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/product/templates",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"product",
+								"templates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product Template By ID",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Active Product Template",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/product/589045d4-1004-453b-8e9f-de3d1328b9a1/templates/active",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"product",
+								"589045d4-1004-453b-8e9f-de3d1328b9a1",
+								"templates",
+								"active"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Consent",
+			"item": [
+				{
+					"name": "Capture Client Consent",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/client/consents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"client",
+								"consents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Client Consent By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/client/consents/77a0e626-3569-4fac-a6b4-8b3943ed5363",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"client",
+								"consents",
+								"77a0e626-3569-4fac-a6b4-8b3943ed5363"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
