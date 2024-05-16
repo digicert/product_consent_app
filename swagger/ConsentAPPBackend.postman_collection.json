@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"language\" : \"English\"\n}",
+							"raw": "{\n    \"language\" : \"German\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -43,7 +43,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8090/languages/bc95129d-dbed-4c30-a51c-d0b8755aadb0/name/German",
+							"raw": "http://localhost:8090/languages/fb8bea43-950b-415e-959c-ab9f5a83d495/name/Dutch",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -51,9 +51,9 @@
 							"port": "8090",
 							"path": [
 								"languages",
-								"bc95129d-dbed-4c30-a51c-d0b8755aadb0",
+								"fb8bea43-950b-415e-959c-ab9f5a83d495",
 								"name",
-								"German"
+								"Dutch"
 							]
 						}
 					},
@@ -65,7 +65,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8090/languages/d4567f9a-707b-4d66-995e-9f76f709ab75",
+							"raw": "http://localhost:8090/languages/6f0f3b14-2135-4379-941f-73b5e6d5b6d0",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -73,7 +73,7 @@
 							"port": "8090",
 							"path": [
 								"languages",
-								"d4567f9a-707b-4d66-995e-9f76f709ab75"
+								"6f0f3b14-2135-4379-941f-73b5e6d5b6d0"
 							]
 						}
 					},
@@ -85,7 +85,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8090/languages?page=1&pageSize=2",
+							"raw": "http://localhost:8090/languages?page=1&pageSize=20",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -101,7 +101,7 @@
 								},
 								{
 									"key": "pageSize",
-									"value": "2"
+									"value": "20"
 								}
 							]
 						}
@@ -114,7 +114,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8090/languages/bc95129d-dbed-4c30-a51c-d0b8755aadb0",
+							"raw": "http://localhost:8090/languages/62c9f152-9a84-4a4a-b5aa-4e0d676fbb36",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -122,7 +122,7 @@
 							"port": "8090",
 							"path": [
 								"languages",
-								"bc95129d-dbed-4c30-a51c-d0b8755aadb0"
+								"62c9f152-9a84-4a4a-b5aa-4e0d676fbb36"
 							]
 						}
 					},
@@ -140,7 +140,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"locale\" : \"ZA\"\n}",
+							"raw": "{\n    \"locale\" : \"EU\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -256,7 +256,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8090/languages/e54907c0-71a8-4c5e-86c0-c4e841b0b52a/locales/6713efc1-d6dd-4ad4-9cfe-d05c222c3f18",
+							"raw": "http://localhost:8090/languages/6f0f3b14-2135-4379-941f-73b5e6d5b6d0/locales/516dcff9-3595-487d-a493-045bf0905d57",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -264,9 +264,9 @@
 							"port": "8090",
 							"path": [
 								"languages",
-								"e54907c0-71a8-4c5e-86c0-c4e841b0b52a",
+								"6f0f3b14-2135-4379-941f-73b5e6d5b6d0",
 								"locales",
-								"6713efc1-d6dd-4ad4-9cfe-d05c222c3f18"
+								"516dcff9-3595-487d-a493-045bf0905d57"
 							]
 						}
 					},
@@ -298,7 +298,20 @@
 					"name": "Get linked languages by locale",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/locales/48c49b5a-e483-4b8d-b87d-f2e849f7cfd4/languages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"locales",
+								"48c49b5a-e483-4b8d-b87d-f2e849f7cfd4",
+								"languages"
+							]
+						}
 					},
 					"response": []
 				}
@@ -314,7 +327,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\" : \"Test100\"\n}",
+							"raw": "{\n    \"name\" : \"IVM_Europe\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -428,7 +441,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"locale_language_id\" : \"213f7147-6702-4ae7-9201-21a2c9a4f778\",\n    \"template_name\": \"template1\"\n}",
+							"raw": "{\n    \"locale_language_id\" : \"7b71bc6f-9c9a-4b4e-8238-a075ad968845\",\n    \"template_name\": \"template2\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -453,7 +466,19 @@
 					"name": "Get Consent Template By ID",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/templates/b3d261ac-4e99-4571-a1fa-4dd8a2a9e57e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"templates",
+								"b3d261ac-4e99-4571-a1fa-4dd8a2a9e57e"
+							]
+						}
 					},
 					"response": []
 				},
@@ -464,7 +489,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\" : \"Test100\"\n}",
+							"raw": "{\n    \"product_id\" : \"a0688f8f-9f58-4475-b636-074699d0fb23\",\n    \"consent_template_id\" : \"b3d261ac-4e99-4571-a1fa-4dd8a2a9e57e\",\n    \"active\" : true\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -490,7 +515,20 @@
 					"name": "Get Product Template By ID",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/product/templates/51bb8e6d-7f28-49ed-9565-d0f9d9dd271c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"product",
+								"templates",
+								"51bb8e6d-7f28-49ed-9565-d0f9d9dd271c"
+							]
+						}
 					},
 					"response": []
 				},
@@ -500,7 +538,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8090/product/589045d4-1004-453b-8e9f-de3d1328b9a1/templates/active",
+							"raw": "http://localhost:8090/product/a0688f8f-9f58-4475-b636-074699d0fb23/templates/active",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -508,7 +546,7 @@
 							"port": "8090",
 							"path": [
 								"product",
-								"589045d4-1004-453b-8e9f-de3d1328b9a1",
+								"a0688f8f-9f58-4475-b636-074699d0fb23",
 								"templates",
 								"active"
 							]
@@ -528,7 +566,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\n    \"product_template_id\" : \"e5fcb112-9780-4232-b7dc-3f8d7726983e\",\n    \"individual_id\": \"1154fee4-e9e6-4a76-9c91-1f1eb0a6564\",\n    \"optout_reason\": \"None\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -556,7 +594,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8090/client/consents/77a0e626-3569-4fac-a6b4-8b3943ed5363",
+							"raw": "http://localhost:8090/client/consents/734773a3-fa89-4baf-9e17-6ae9b072b781",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -565,7 +603,7 @@
 							"path": [
 								"client",
 								"consents",
-								"77a0e626-3569-4fac-a6b4-8b3943ed5363"
+								"734773a3-fa89-4baf-9e17-6ae9b072b781"
 							]
 						}
 					},
